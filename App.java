@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -7,15 +8,11 @@ public class App {
 
         JFrame frame = new JFrame("Snake");
         frame.setVisible(true);
-	frame.setSize(boardWidth, boardHeight);
+	    frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
-        frame.add(snakeGame);
-        frame.pack();
-        snakeGame.requestFocus();
         createMenu(frame, boardWidth, boardHeight);
     }
 
@@ -52,6 +49,9 @@ public class App {
         menuPanel.add(startButton);
         menuPanel.add(settingsButton);
         menuPanel.add(exitButton);
+        startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        exitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         frame.add(menuPanel);
         frame.setVisible(true);
