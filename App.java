@@ -8,7 +8,7 @@ public class App {
 
         JFrame frame = new JFrame("Snake");
         frame.setVisible(true);
-	    frame.setSize(boardWidth, boardHeight);
+	frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,9 +37,9 @@ public class App {
             snakeGame.requestFocus();
         });
 
-        JButton settingsButton = new JButton("Configurações");
-        settingsButton.setBounds(200, 270, 200, 50);
-        settingsButton.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Configurações ainda não implementadas."));
+        JButton howToPlayButton = new JButton("Como Jogar:");
+        howToPlayButton.setBounds(200, 270, 200, 50);
+        howToPlayButton.addActionListener(e -> abrirComoJogarFrame());
 
         JButton exitButton = new JButton("Sair");
         exitButton.setBounds(200, 340, 200, 50);
@@ -47,13 +47,52 @@ public class App {
 
         menuPanel.add(title);
         menuPanel.add(startButton);
-        menuPanel.add(settingsButton);
+        menuPanel.add(howToPlayButton);
         menuPanel.add(exitButton);
+
         startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        howToPlayButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         exitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 
         frame.add(menuPanel);
         frame.setVisible(true);
     }
+
+    private static void abrirComoJogarFrame() {
+        JFrame comoJogarFrame = new JFrame("Como Jogar");
+        comoJogarFrame.setSize(500, 500);
+        comoJogarFrame.setLocationRelativeTo(null);
+        comoJogarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        //textos
+        JLabel texto = new JLabel("Use as setas para controlar a cobra e comer os alimentos!");
+        texto.setHorizontalAlignment(SwingConstants.CENTER);
+        texto.setFont(new Font("Arial", Font.PLAIN, 18));
+
+        JLabel texto2 = new JLabel("<html>O Snake Game é um jogo simples e divertido no qual você controla uma cobra " +
+                "que cresce ao comer alimentos. O objetivo principal é fazer a maior pontuação " +
+                "possível sem bater em paredes ou em si mesma.</html>");
+        texto2.setFont(new Font("Arial", Font.PLAIN, 14));  // Ajusta o tamanho da fonte
+        texto2.setHorizontalAlignment(SwingConstants.CENTER);
+        texto2.setPreferredSize(new Dimension(400, 100));  // Ajusta o tamanho do texto para caber na janela
+
+
+        //Inserção de imagem
+        ImageIcon imagem = new ImageIcon("png-transparent-arrow-keys-free-thumbnail.png");
+        Image imagemReduzida = imagem.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH); //redução
+        ImageIcon imagem2 = new ImageIcon(imagemReduzida);
+        JLabel labelImagem = new JLabel(imagem2);
+
+        panel.add(texto, BorderLayout.NORTH);
+        panel.add(labelImagem, BorderLayout.CENTER);
+        panel.add(texto2, BorderLayout.SOUTH);
+
+        comoJogarFrame.add(panel);
+
+        comoJogarFrame.setVisible(true);
+    }
 }
+
