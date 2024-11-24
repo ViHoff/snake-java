@@ -176,75 +176,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             gameLoop.stop();
 
             //Cria o frame Game Over
-            JFrame gameOverFrame = new JFrame("Game Over");
-            gameOverFrame.setSize(800, 500);
-            gameOverFrame.setLocationRelativeTo(null);
-            gameOverFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-            //Cria o painel de Game Over
-            JPanel gameOverPanel = new JPanel();
-            gameOverPanel.setLayout(null);
-            gameOverPanel.setBackground(java.awt.Color.BLACK);
-            
-            //Título do Game Over
-            JLabel gameOverTitle = new JLabel("Game Over");
-            //Centraliza texto
-            gameOverTitle.setHorizontalAlignment(SwingConstants.CENTER);
-            //Tamanho e posição
-            gameOverTitle.setBounds(100, 100, 600, 100);
-            //Fonte e tamanho
-            gameOverTitle.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 54));
-            //Cor da letra
-            gameOverTitle.setForeground(java.awt.Color.RED);
-            
-            
-
-            //Texto HighScore
-            JLabel gameOverText = new JLabel("HighScore: " + String.valueOf(snakeBody.size()));
-            //Centraliza texto
-            gameOverText.setHorizontalAlignment(SwingConstants.CENTER);
-            //Tamanho e posição
-            gameOverText.setBounds(300, 200, 200, 50);
-            //Fonte e tamanho
-            gameOverText.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
-            //Cor da letra
-            gameOverText.setForeground(java.awt.Color.WHITE);
-
-            //Botão de Jogar novamente
-            JButton gameRestartButton = new JButton("Jogar Novamente");
-            //Centraliza texto
-            gameRestartButton.setHorizontalAlignment(SwingConstants.CENTER);
-            //Tamanho e posição
-            gameRestartButton.setBounds(80, 300, 300, 100);
-            //Fonte e tamanho
-            gameRestartButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
-            //Listener
-            gameRestartButton.addActionListener(f -> {
-                gameOverFrame.dispose();
-                restartGame();
-            });
-            
-            //Botão de saída
-            JButton gameLeaveButton = new JButton("Sair");
-            //Centraliza texto
-            gameLeaveButton.setHorizontalAlignment(SwingConstants.CENTER);
-            //Tamanho e posição
-            gameLeaveButton.setBounds(400, 300, 300, 100);
-            //Fonte e tamanho
-            gameLeaveButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
-            //Cor da letra
-            gameLeaveButton.addActionListener(f -> {
-                System.exit(0);
-            });
-
-            gameOverPanel.add(gameOverTitle);
-            gameOverPanel.add(gameOverText);
-            gameOverPanel.add(gameRestartButton);
-            gameOverPanel.add(gameLeaveButton);
-
-            gameOverFrame.add(gameOverPanel);
-
-            gameOverFrame.setVisible(true);
+            gameOverScreen();
 
         }
     }  
@@ -280,6 +212,79 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    private void gameOverScreen(){
+        //Cria o frame Game Over
+        JFrame gameOverFrame = new JFrame("Game Over");
+        gameOverFrame.setSize(800, 500);
+        gameOverFrame.setLocationRelativeTo(null);
+        gameOverFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //Cria o painel de Game Over
+        JPanel gameOverPanel = new JPanel();
+        gameOverPanel.setLayout(null);
+        gameOverPanel.setBackground(java.awt.Color.BLACK);
+        
+        //Título do Game Over
+        JLabel gameOverTitle = new JLabel("Game Over");
+        //Centraliza texto
+        gameOverTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        //Tamanho e posição
+        gameOverTitle.setBounds(100, 100, 600, 100);
+        //Fonte e tamanho
+        gameOverTitle.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 54));
+        //Cor da letra
+        gameOverTitle.setForeground(java.awt.Color.RED);
+        
+        
+
+        //Texto HighScore
+        JLabel gameOverText = new JLabel("HighScore: " + String.valueOf(snakeBody.size()));
+        //Centraliza texto
+        gameOverText.setHorizontalAlignment(SwingConstants.CENTER);
+        //Tamanho e posição
+        gameOverText.setBounds(300, 200, 200, 50);
+        //Fonte e tamanho
+        gameOverText.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
+        //Cor da letra
+        gameOverText.setForeground(java.awt.Color.WHITE);
+
+        //Botão de Jogar novamente
+        JButton gameRestartButton = new JButton("Jogar Novamente");
+        //Centraliza texto
+        gameRestartButton.setHorizontalAlignment(SwingConstants.CENTER);
+        //Tamanho e posição
+        gameRestartButton.setBounds(80, 300, 300, 100);
+        //Fonte e tamanho
+        gameRestartButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
+        //Listener
+        gameRestartButton.addActionListener(f -> {
+            gameOverFrame.dispose();
+            restartGame();
+        });
+        
+        //Botão de saída
+        JButton gameLeaveButton = new JButton("Sair");
+        //Centraliza texto
+        gameLeaveButton.setHorizontalAlignment(SwingConstants.CENTER);
+        //Tamanho e posição
+        gameLeaveButton.setBounds(400, 300, 300, 100);
+        //Fonte e tamanho
+        gameLeaveButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
+        //Cor da letra
+        gameLeaveButton.addActionListener(f -> {
+            System.exit(0);
+        });
+
+        gameOverPanel.add(gameOverTitle);
+        gameOverPanel.add(gameOverText);
+        gameOverPanel.add(gameRestartButton);
+        gameOverPanel.add(gameLeaveButton);
+
+        gameOverFrame.add(gameOverPanel);
+
+        gameOverFrame.setVisible(true);
+    }
 
     private void restartGame(){
         snakeBody.clear();
