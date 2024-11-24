@@ -333,11 +333,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         else{
             //Criar arquivo
             try(FileWriter writer = new FileWriter("score.txt")){
-                writer.write("0");
+                writer.write(snakeBody.size());
             } catch(IOException e){
                 System.out.println("Erro ao criar o arquivo");
             }
         }
     }
-
-}
