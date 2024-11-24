@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -27,6 +32,11 @@ public class App {
         title.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36));
         title.setBounds(180, 100, 300, 50);
 
+        JLabel highScore = new JLabel("High Score: " +  highScoreRead());
+        highScore.setForeground(java.awt.Color.GREEN);
+        highScore.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
+        highScore.setBounds(10, -10, 200, 60);
+
         JButton startButton = new JButton("Iniciar Jogo");
         startButton.setBounds(200, 200, 200, 50);
         startButton.addActionListener(e -> {
@@ -47,6 +57,7 @@ public class App {
         exitButton.addActionListener(e -> System.exit(0));
 
         menuPanel.add(title);
+        menuPanel.add(highScore);
         menuPanel.add(startButton);
         menuPanel.add(howToPlayButton);
         menuPanel.add(exitButton);
@@ -95,5 +106,36 @@ public class App {
 
         comoJogarFrame.setVisible(true);
     }
-}
 
+    private static String highScoreRead(){
+        if(highScoreFileCheck()){
+            try(BufferedReader reader = new BufferedReader(new FileReader("score.txt"))){
+                return reader.readLine();
+            } catch (IOException e){
+                System.out.println("Erro ao ler o arquivo");
+                e.printStackTrace();
+                return "Erro";
+            }
+        } else{
+            try(FileWriter writer = new FileWriter("score.txt")){
+                writer.write("0");
+                return "0";
+            } catch(IOException e){
+                System.out.println("Erro ao escrever o arquivo");
+                e.printStackTrace();
+                return "Erro";
+            }
+        }
+
+    } 
+
+    private static boolean highScoreFileCheck(){
+        File score = new File("score.txt");
+        if(score.exists()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}

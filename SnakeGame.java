@@ -168,6 +168,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
                 System.exit(0);
             }*/
 
+            //Escreve novo highscore ao arquivo
+            System.out.println(snakeBody.size());
+            highScoreWrite();
+
             //Para o jogo
             gameLoop.stop();
 
@@ -297,21 +301,38 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    private void highScoreWrite(){
-        if(highScoreFileCheck()){
-            try(BufferedReader reader = new BufferedReader(new FileReader("score.txt"))){
-                int highScore = Integer.parseInt(reader.readLine());
-                if(snakeBody.size() > highScore){
-                    //Write to file
+    private int highScoreRead(){
+        try(BufferedReader reader = new BufferedReader(new FileReader("score.txt"))){
+            return Integer.parseInt(reader.readLine());
+        } catch (IOException e){
+            System.out.println("Erro ao ler o arquivo");
+            e.printStackTrace();
+        }
+        return -1;
+    } 
 
+    private void highScoreWrite(){
+        //Se o arquivo existe
+        if(highScoreFileCheck()){
+                //Se score atual for maior que o lido
+                if(snakeBody.size() > highScoreRead()){
+                    //Escrever novo high score no arquivo
+                    String newScore = String.valueOf(snakeBody.size());
+                    try(FileWriter writer = new FileWriter("score.txt")){
+                        writer.write(newScore);
+                    } catch(IOException e){
+                        System.out.println("Erro ao escrever ao arquivo");
+                    }
                 }
-            } catch (IOException e){
-                System.out.println("Erro ao ler o arquivo");
-                e.printStackTrace();
-            }
         }
         else{
-            //Create file
-        }
-    }
+            //Criar arquivo
+            try(FileWriter writer = new FileWriter("score.txt")){
+                writer.write("0");
+            } catch(IOException e){
+                System.out.println("Erro ao criar o arquivo");
+            }
+        }
+    }
+
 }
