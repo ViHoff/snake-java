@@ -332,7 +332,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             } catch(IOException e){
                 System.out.println("Erro ao criar o arquivo");
             }
-        }
-    }
+        }
+    }
 
 }
