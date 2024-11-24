@@ -14,6 +14,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         createMenu(frame, boardWidth, boardHeight);
+        
     }
 
     private static void createMenu(JFrame frame, int boardWidth, int boardHeight) {
